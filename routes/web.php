@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("home");
 Route::prefix('products')->group(function (){
     Route::get('/',[ProductController::class,'index'])->name("products.index");
     Route::get('/detail/{id}',[ProductController::class,'show'])->name("products.show");
@@ -25,5 +27,15 @@ Route::prefix('products')->group(function (){
     Route::get('/delete/{id}',[ProductController::class,'destroy'])->name("products.delete");
     Route::get('/edit/{id}',[ProductController::class,'showFormEdit'])->name("products.showFormEdit");
     Route::post('/edit/{id}',[ProductController::class,'update'])->name("products.update");
-
 });
+Route::prefix("/users")->group(function (){
+    Route::get('/',[UserController::class,'index'])->name("users.index");
+    Route::get('/detail/{id}',[UserController::class,'show'])->name("users.show");
+    Route::get('/create',[UserController::class,'showFormCreate'])->name("users.create");
+    Route::post('/create',[UserController::class,'store'])->name("users.store");
+    Route::get('/delete/{id}',[UserController::class,'destroy'])->name("users.delete");
+    Route::get('/edit/{id}',[UserController::class,'showFormEdit'])->name("users.showFormEdit");
+    Route::post('/edit/{id}',[UserController::class,'update'])->name("users.update");
+});
+Route::get('/login',[AuthController::class,'showFormLogin'])->name('admin.showFormLogin');
+Route::post('/login',[AuthController::class,'login'])->name('admin.login');

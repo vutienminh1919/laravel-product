@@ -4,43 +4,48 @@ namespace App\Repositories;
 
 use App\Models\Product;
 
-use http\QueryString;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent;
 
-class ProductRepository
+class ProductRepository extends BaseRepository
 {
-    public function getAll()
+//    protected $model;
+    public function __construct(Product $product)
     {
-        $products = Product::all();
-        return $products;
+        parent::__construct($product);
     }
 
-    public function getById($id)
-    {
-        $product = Product::query()->findOrFail($id);
-        return $product;
-    }
+//    public function getAll()
+//    {
+//        $products = Product::all();
+//        return $products;
+//    }
+//
+//    public function getById($id)
+//    {
+//        $product = Product::findOrFail($id);
+//        return $product;
+//    }
 
     public function create(Request $request)
     {
         $data = $request->only('name','description','price');
-        $product = Product::query()->create($data);
+        $product = Product::create($data);
         return $product;
     }
 
-    public function delete($id)
-    {
-        $product = Product::query()->findOrFail($id);
-        $product->delete();
-    }
+//    public function delete($id)
+//    {
+//        $product = Product::findOrFail($id);
+//        $product->delete();
+//    }
 
     public function edit(Request $request, $id)
     {
-        $product = Product::query()->findOrFail($id);
+        $product = Product::findOrFail($id);
         $data = $request->only('name','description','price');
-       return Product::query()->where("id","=",$id)->update($data);
+       return Product::where("id","=",$id)->update($data);
     }
 
 }

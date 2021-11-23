@@ -18,13 +18,13 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productRepository->getAll();
-        return view('product.list', compact("products"));
+        return view('backend.product.list', compact("products"));
     }
 
 
     public function showFormCreate()
     {
-        return view("product.create");
+        return view("backend.product.create");
     }
 
 
@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->productRepository->getById($id);
-        return view('product.detail', compact("product"));
+        return view('backend.product.detail', compact("product"));
 
     }
 
@@ -46,7 +46,7 @@ class ProductController extends Controller
     public function showFormEdit($id)
     {
         $product = $this->productRepository->getById($id);
-        return view("product.edit", compact("product"));
+        return view("backend.product.edit", compact("product"));
 
     }
 
