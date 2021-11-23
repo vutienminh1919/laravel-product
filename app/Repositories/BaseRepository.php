@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\This;
-
+use Illuminate\Pagination\Paginator;
 class BaseRepository
 {
     protected Model $model;
@@ -16,7 +16,7 @@ class BaseRepository
 
     public function getAll()
     {
-        $models = $this->model->all();
+        $models = $this->model->all()->toQuery()->paginate(2);
         return $models;
     }
 

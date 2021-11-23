@@ -18,7 +18,7 @@ class ProductRepository extends BaseRepository
 
 //    public function getAll()
 //    {
-//        $products = Product::all();
+//        $products = Product::all()->toQuery()->paginate(2);
 //        return $products;
 //    }
 //
