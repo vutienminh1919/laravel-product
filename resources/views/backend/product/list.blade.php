@@ -1,19 +1,35 @@
 @extends('backend.layout.master')
 @section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <a type="button" class="btn btn-primary" href=" {{route('products.create')}}">Add New Product</a>
+            </div>
+            <div class="col-4">
+                {{$products->links('vendor.pagination.bootstrap-4')}}
+            </div>
+            <div class="col-2">
+                <form action="" method="post">
+                    <input style="width: 50px" type="text" name="page">
+                    <button type="submit">Go</button>
+                </form>
+            </div>
 
+        </div>
+    </div>
 
     <div class="container">
         <table border="1px" class="table table-hover" style="width: 100%">
-            <a type="button" class="btn btn-primary" href=" {{route('products.create')}}">Add New Product</a>
+
             <thead class="thead-dark">
             <th>ID</th>
             <th>Image</th>
             <th>Name</th>
-{{--            <th>Description</th>--}}
+            {{--            <th>Description</th>--}}
             <th>Price</th>
 
-{{--            <th>Create at </th>--}}
-{{--            <th>Update at</th>--}}
+            {{--            <th>Create at </th>--}}
+            {{--            <th>Update at</th>--}}
             <th colspan="3">Action</th>
             </thead>
             @foreach($products as $product)
@@ -22,13 +38,16 @@
                     <td><b>{{$product->id}}</b></td>
                     <td><img style="width: 100px" src="img/{{$product->image}}" alt=""></td>
                     <td>{{$product->name}}</td>
-{{--                    <td>{{$product->description}}</td>--}}
+                    {{--                    <td>{{$product->description}}</td>--}}
                     <td>{{$product->price}}</td>
-{{--                    <td>{{$product->created_at}}</td>--}}
-{{--                    <td>{{$product->updated_at}}</td>--}}
-                    <td><a type="button" class="btn btn-success" href="{{route("products.showFormEdit",$product->id)}}">Edit</a></td>
-                    <td><a type="button" class="btn btn-info" href="{{route('products.show',$product->id)}}">Detail</a></td>
-                    <td><a  type="button" class="btn btn-danger" onclick="return confirm(' Are you sure ? ')" href="{{route('products.delete',$product->id)}}">Delete</a></td>
+                    {{--                    <td>{{$product->created_at}}</td>--}}
+                    {{--                    <td>{{$product->updated_at}}</td>--}}
+                    <td><a type="button" class="btn btn-success" href="{{route("products.showFormEdit",$product->id)}}">Edit</a>
+                    </td>
+                    <td><a type="button" class="btn btn-info" href="{{route('products.show',$product->id)}}">Detail</a>
+                    </td>
+                    <td><a type="button" class="btn btn-danger" onclick="return confirm(' Are you sure ? ')"
+                           href="{{route('products.delete',$product->id)}}">Delete</a></td>
 
                 </tr>
                 </tbody>
@@ -36,9 +55,18 @@
             @endforeach
         </table>
     </div>
-<div class="container">
-    {{$products->links('views.backend.vendor.')}}
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+
+            </div>
+            <div>
+                {{$products->links('vendor.pagination.bootstrap-4')}}
+            </div>
+        </div>
+
+    </div>
+
 @endsection
 
 
