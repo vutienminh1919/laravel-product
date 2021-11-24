@@ -42,3 +42,4 @@ Route::post('/login',[AuthController::class,'login'])->name('admin.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('admin.logout');
 Route::get('/register',[AuthController::class,'showFormRegister'])->name('admin.showFormRegister');
 Route::post('/register',[AuthController::class,'register'])->name('admin.register');
+Route::get('/change-password',[AuthController::class,'showChangePasswordForm'])->name('admin.showChangePasswordForm');

@@ -30,7 +30,11 @@ class ProductRepository extends BaseRepository
 
     public function create(Request $request)
     {
-        $data = $request->only('name','description','price');
+        $data = $request->only('name', 'description', 'price', 'image');
+        $image = $request->file('file');
+        $data['image'] = time().'.'.$image->getClientOriginalExtension();
+        $path = public_path('img');
+        $image->move($path,$data['image']);
         $product = Product::create($data);
         return $product;
     }
@@ -44,8 +48,8 @@ class ProductRepository extends BaseRepository
     public function edit(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-        $data = $request->only('name','description','price');
-       return Product::where("id","=",$id)->update($data);
+        $data = $request->only('name', 'description', 'price');
+        return Product::where("id", "=", $id)->update($data);
     }
 
 }

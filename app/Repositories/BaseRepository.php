@@ -16,7 +16,7 @@ class BaseRepository
 
     public function getAll()
     {
-        $models = $this->model->all()->toQuery()->paginate(2);
+        $models = $this->model->all()->toQuery()->paginate(5);
         return $models;
     }
 

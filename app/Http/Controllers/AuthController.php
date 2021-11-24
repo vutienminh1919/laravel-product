@@ -18,13 +18,12 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $data = $request->only('email','password');
+        $data = $request->only('email', 'password');
 
 
-        if (Auth::attempt($data)){
+        if (Auth::attempt($data)) {
             return redirect()->route('home');
-        }
-        else{
+        } else {
             dd('chuc ban may man lan sau ');
         }
     }
@@ -44,9 +43,15 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $data = $request->only('name','email','password');
+        $data = $request->only('name', 'email', 'password');
         $data['password'] = Hash::make($request->password);
         $user = User::query()->create($data);
         return redirect()->route('admin.login');
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('backend.auth.changePassword');
+
     }
 }
